@@ -15,6 +15,7 @@ import {
 } from '@ionic/react';
 import BmiControls from './components/BmiControls';
 import BmiResult from './components/BmiResult';
+import InputControl from './components/InputControl';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,6 +39,7 @@ import './theme/variables.css';
 const App: React.FC = () => {
   const [calculatedBmi, setCalculatedBmi] = useState<number>(); // telling TS this state will eventually be number
   const [ error, setError ] = useState<string>();
+  const [ calcUnits, setCalcUnits ] = useState<'mkg' | 'ftlbs'>('mkg'); // initially set to 'mkg'
 
   // setting up ref hook to capture input values
   const weightInput = useRef<HTMLIonInputElement>(null);   // <HTMLIonInputElement> and (null) is TS spec. it will hold core type element
@@ -64,7 +66,12 @@ const App: React.FC = () => {
 
   const clearError = () => {
     setError('');
-  }
+  };
+
+  const selectCalcUnitHandler = (selectedValue: 'mkg' | 'ftlbs') => {
+    // setting aetCalcUnits to selected state
+    setCalcUnits(selectedValue)
+  };
 
   return (
     <React.Fragment>
@@ -77,6 +84,11 @@ const App: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding">
         <IonGrid>
+          <IonRow>
+            <IonCol>
+              <InputControl selectedValue={calcUnits} onSelectValue={selectCalcUnitHandler} />
+            </IonCol>
+          </IonRow>
           <IonRow>
             <IonCol>
               <IonItem>
