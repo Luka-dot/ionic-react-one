@@ -65,7 +65,7 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonTitle>BMI Calculator</IonTitle>
         </IonToolbar>
       </IonHeader>
