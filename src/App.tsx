@@ -10,7 +10,8 @@ import {
   IonCol,
   IonItem,
   IonLabel,
-  IonInput
+  IonInput,
+  IonAlert
 } from '@ionic/react';
 import BmiControls from './components/BmiControls';
 import BmiResult from './components/BmiResult';
@@ -36,6 +37,7 @@ import './theme/variables.css';
 
 const App: React.FC = () => {
   const [calculatedBmi, setCalculatedBmi] = useState<number>(); // telling TS this state will eventually be number
+  const [ error, setError ] = useState<string>();
 
   // setting up ref hook to capture input values
   const weightInput = useRef<HTMLIonInputElement>(null);   // <HTMLIonInputElement> and (null) is TS spec. it will hold core type element
@@ -46,6 +48,7 @@ const App: React.FC = () => {
     const enteredHeight = heightInput.current!.value; // ! telling TS that this value will ALWAYS be set. it might be '' but not null
 
     if (!enteredHeight || !enteredWeight || +enteredWeight <= 0 || +enteredHeight <=0 ) {
+      setError('Please enter valid number (number has to be greater then 0).');
       return;
     }
     const bmi = +enteredWeight / (+enteredHeight * +enteredHeight);
@@ -59,7 +62,13 @@ const App: React.FC = () => {
     setCalculatedBmi(NaN);
   };
 
+  const clearError = () => {
+    setError('');
+  }
+
   return (
+    <React.Fragment>
+      <IonAlert isOpen={!!error} message={error} buttons={[{text: 'Okay', handler: clearError }]}/>
     <IonApp>
       <IonHeader>
         <IonToolbar color="primary">
@@ -92,6 +101,7 @@ const App: React.FC = () => {
       </IonContent>
 
     </IonApp>
+    </React.Fragment>
   );
 };
 
