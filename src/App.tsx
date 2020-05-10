@@ -45,7 +45,7 @@ const App: React.FC = () => {
     const enteredWeight = weightInput.current?.value; // ? is TS feature added and checking for null values
     const enteredHeight = heightInput.current!.value; // ! telling TS that this value will ALWAYS be set. it might be '' but not null
 
-    if (!enteredHeight || !enteredWeight) {
+    if (!enteredHeight || !enteredWeight || +enteredWeight <= 0 || +enteredHeight <=0 ) {
       return;
     }
     const bmi = +enteredWeight / (+enteredHeight * +enteredHeight);
@@ -72,7 +72,7 @@ const App: React.FC = () => {
             <IonCol>
               <IonItem>
                 <IonLabel position="floating">Your Height</IonLabel>
-                <IonInput ref={heightInput}></IonInput>
+                <IonInput type="number" ref={heightInput}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -80,7 +80,7 @@ const App: React.FC = () => {
             <IonCol>
               <IonItem>
                 <IonLabel position="floating">Your Weight</IonLabel>
-                <IonInput ref={weightInput}></IonInput>
+                <IonInput type="number" ref={weightInput}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
