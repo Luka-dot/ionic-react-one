@@ -3,6 +3,7 @@ import { IonRow, IonCol, IonCard, IonCardContent } from '@ionic/react';
 
 // {onResult: number | string} letting TS know that onResult will return number or string
 // using only number in this case so we can call toFixed later in order to display 2 decimals
+
 const BmiResult: React.FC<{onResult: number}> = props => {
     return (
         <IonRow>

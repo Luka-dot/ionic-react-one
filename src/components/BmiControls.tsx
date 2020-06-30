@@ -4,6 +4,7 @@ import { calculatorOutline, refreshOutline } from 'ionicons/icons';
 
 // TS in <> defining what type of props data will receive
 // {onCalculate: () => void} telling TS that onCalculate is function that receives no argument and does not return anything
+
 const BmiControls: React.FC<{ onCalculate: () => void; onReset: () => void }> = props => {
     return (
         <IonRow>
